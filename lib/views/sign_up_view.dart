@@ -37,7 +37,7 @@ late final TextEditingController _passwordContoller;
       // scafold - стандартне рішення яке має в собі аппбар і тіло
       // todo вивчити всі можливості скалафорду
       backgroundColor: const Color.fromARGB(173, 69, 65, 65),
-      appBar: AppBar(title: const Text('Sign Up Page Git Changes Again Again')), 
+      appBar: AppBar(title: const Text('Sign Up Page')), 
       body: FutureBuilder(
         future: Firebase.initializeApp(
           //Firebase.initializeApp() needs to call native code to initialize Firebase, 
