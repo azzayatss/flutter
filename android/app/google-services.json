@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "902318724275",
+    "project_id": "lleningddart",
+    "storage_bucket": "lleningddart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902318724275:android:c3374124cdeed155eb4cc6",
+        "android_client_info": {
+          "package_name": "com.example.lerningdart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902318724275-v5g8jfi2v642n492jv2pgs6kr60u7c8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnaDB5Z3LjSQV46UDUjqSdKrhcCXOUcys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902318724275-v5g8jfi2v642n492jv2pgs6kr60u7c8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
