@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import '../firebase_options.dart';
+
 // import 'package:flutter/src/widgets/container.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 
@@ -33,21 +32,7 @@ late final TextEditingController _passwordContoller;
 
    @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // scafold - стандартне рішення яке має в собі аппбар і тіло
-      // todo вивчити всі можливості скалафорду
-      backgroundColor: const Color.fromARGB(173, 69, 65, 65),
-      appBar: AppBar(title: const Text('Sign Up Page qwery')), 
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          //Firebase.initializeApp() needs to call native code to initialize Firebase, 
-          //тобто ми простка кажемо "ей флаттер ми тут юзаєм firebase, знай про це))"
-          options: DefaultFirebaseOptions.currentPlatform),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            
-          case ConnectionState.done:
-            return Column(
+    return Column(
           children: [
             TextField(
             style: const TextStyle(color: Colors.white),
@@ -93,12 +78,6 @@ late final TextEditingController _passwordContoller;
             )
           ],
         ); 
-         default: 
-         return const Text('Loading...');
-          }
-        
-        },
-      )); 
   }
 }
 

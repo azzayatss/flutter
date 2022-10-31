@@ -55,6 +55,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: const Color.fromARGB(173, 69, 65, 65),
       appBar: AppBar(title: const Text('Home')), 
       body: FutureBuilder(
+        // todo розібратись з фючер білдером
         future: Firebase.initializeApp(
           //Firebase.initializeApp() needs to call native code to initialize Firebase, 
           //тобто ми простка кажемо "ей флаттер ми тут юзаєм firebase, знай про це))"
@@ -64,19 +65,43 @@ class HomePage extends StatelessWidget {
             
           case ConnectionState.done:
           final user = FirebaseAuth.instance.currentUser;
-          if (user?.emailVerified ?? false) {
-            // ! закінчив тут 
-            print('You are verified');
-          } else {
-            print('You need to verify your email first');
-          }
+          // print(user);
+          if (user?.emailVerified ?? false) { 
             return const Text('Done');
+        } else { 
+           return const VerifyEmailView();
+          }
+        // return const SignInView();
          default: 
          return const Text('Loading...');
           }
         
         },
       )); 
+  }
+}
+
+class VerifyEmailView extends StatefulWidget {
+  const VerifyEmailView({super.key});
+
+  @override
+  State<VerifyEmailView> createState() => _VerifyEmailViewState();
+}
+
+class _VerifyEmailViewState extends State<VerifyEmailView> {
+  @override
+  Widget build(BuildContext context) {
+    return  Column(children: [
+         const Text('Please Verify your email'),
+         TextButton(
+          onPressed: () async {
+            final user = FirebaseAuth.instance.currentUser;
+            await user?.sendEmailVerification();
+            // ?? треба пояснення по фючербілдер чи фючер + евейт + асинк,
+            // ?? що б було якби я не прописав евейт?
+          }, 
+          child: const Text('Send email verification'))
+      ]);
   }
 }
 
