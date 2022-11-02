@@ -38,8 +38,8 @@ late final TextEditingController _passwordContoller;
               controller: _emailContoller,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                  hintStyle: TextStyle(color: Colors.deepPurple),
-                  hintText: 'email'
+                  hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                  hintText: 'Enter you email here'
             ),
             ),
             TextField(
@@ -49,8 +49,8 @@ late final TextEditingController _passwordContoller;
               enableSuggestions: false,
               autocorrect: false,
               decoration: const InputDecoration(
-                hintStyle: TextStyle(color: Colors.deepPurple),
-                hintText: 'password'
+                hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                hintText: 'Enter your password here'
             )
             ),
             TextButton(
@@ -74,7 +74,6 @@ late final TextEditingController _passwordContoller;
                   //on FirebaseAuthException catch (e) {
                   //   print(e.code);
                   // }
-
                   //1
                   //catch (e) {
                   //   print('Something went wrong');
@@ -84,7 +83,22 @@ late final TextEditingController _passwordContoller;
                   
             },
             child: const Text('Sign In'),
-            )
+            ),
+            const Align(
+              alignment: Alignment.centerLeft,
+                child: Text(
+                  'Not yet registered???\nClick button below to Sign Up',
+                  style: TextStyle(color: Colors.white),),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: 
+                TextButton(
+                  onPressed: (){},
+                  child: const Text ('Create new account') 
+                ) ,
+            ),
+            
           ],
         ); 
   }
