@@ -31,76 +31,83 @@ late final TextEditingController _passwordContoller;
 
    @override
   Widget build(BuildContext context) {
-    return Column(
-          children: [
-            TextField(
-            style: const TextStyle(color: Colors.white),
-              controller: _emailContoller,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                  hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
-                  hintText: 'Enter you email here'
-            ),
-            ),
-            TextField(
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(173, 69, 65, 65),
+      appBar: AppBar(title: const Text('Sign In')),
+      body: Column(
+            children: [
+              TextField(
               style: const TextStyle(color: Colors.white),
-              controller: _passwordContoller,
-              obscureText: true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: const InputDecoration(
-                hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
-                hintText: 'Enter your password here'
-            )
-            ),
-            TextButton(
-                onPressed: () async {
-                  final email = _emailContoller.text;
-                  final password =_passwordContoller.text;
-                  try {
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
-                    email: email,
-                    password: password);
-                    print('login success');
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      print('User not found in Firebase');
-                    } else if (e.code == 'wrong-password'){
-                      print('The password is wrong');
+                controller: _emailContoller,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                    hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                    hintText: 'Enter you email here'
+              ),
+              ),
+              TextField(
+                style: const TextStyle(color: Colors.white),
+                controller: _passwordContoller,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(
+                  hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                  hintText: 'Enter your password here'
+              )
+              ),
+              TextButton(
+                  onPressed: () async {
+                    final email = _emailContoller.text;
+                    final password =_passwordContoller.text;
+                    try {
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: email,
+                      password: password);
+                      print('login success');
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('User not found in Firebase');
+                      } else if (e.code == 'wrong-password'){
+                        print('The password is wrong');
+                      }
                     }
-                  }
-                  // 3 той приклад що зверху
-                  // 2
-                  //on FirebaseAuthException catch (e) {
-                  //   print(e.code);
-                  // }
-                  //1
-                  //catch (e) {
-                  //   print('Something went wrong');
-                  //   print(e.runtimeType);
-                  //   print(e);
-                  // }
-                  
-            },
-            child: const Text('Sign In'),
-            ),
-            const Align(
-              alignment: Alignment.centerLeft,
-                child: Text(
-                  'Not yet registered???\nClick button below to Sign Up',
-                  style: TextStyle(color: Colors.white),),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: 
-                TextButton(
-                  onPressed: (){},
-                  child: const Text ('Create new account') 
-                ) ,
-            ),
-            
-          ],
-        ); 
+                    // 3 той приклад що зверху
+                    // 2
+                    //on FirebaseAuthException catch (e) {
+                    //   print(e.code);
+                    // }
+                    //1
+                    //catch (e) {
+                    //   print('Something went wrong');
+                    //   print(e.runtimeType);
+                    //   print(e);
+                    // }
+                    
+              },
+              child: const Text('Sign In'),
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Not yet registered???\nClick button below to Sign Up',
+                    style: TextStyle(color: Colors.white),),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: 
+                  TextButton(
+                    onPressed: (){
+                      Navigator.of(context).pushNamedAndRemoveUntil('/sign-up/',
+                       (route) => false);
+                    },
+                    child: const Text ('Create new account') 
+                  ) ,
+              ),
+              
+            ],
+          ),
+    ); 
   }
   }
 

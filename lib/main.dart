@@ -36,6 +36,10 @@ class App extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
         ),
         home: const HomePage (),
+        routes: {
+          '/sign-in/':(context) => const SignInView(),
+          '/sign-up/':(context) => const SignUpView(),
+        },
         // home: const HomePage(),
         // ?? пробував додати якусь наступну сторінку але не зрозумів як, 
         // ?? де шукати всі варіанти, в кмнд + клік по матіріал апу не найшов))
@@ -49,12 +53,7 @@ class HomePage extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // scafold - стандартне рішення яке має в собі аппбар і тіло
-      // todo вивчити всі можливості скалафорду
-      backgroundColor: const Color.fromARGB(173, 69, 65, 65),
-      appBar: AppBar(title: const Text('Home')), 
-      body: FutureBuilder(
+    return FutureBuilder(
         // todo розібратись з фючер білдером
         future: Firebase.initializeApp(
           //Firebase.initializeApp() needs to call native code to initialize Firebase, 
@@ -77,7 +76,7 @@ class HomePage extends StatelessWidget {
           }
         
         },
-      )); 
+      );
   }
 }
 

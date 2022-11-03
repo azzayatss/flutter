@@ -32,52 +32,68 @@ late final TextEditingController _passwordContoller;
 
    @override
   Widget build(BuildContext context) {
-    return Column(
-          children: [
-            TextField(
-            style: const TextStyle(color: Colors.white),
-              controller: _emailContoller,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                  hintStyle: TextStyle(color: Colors.deepPurple),
-                  hintText: 'email'
-            ),
-            ),
-            TextField(
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(173, 69, 65, 65),
+      appBar: AppBar(title: const Text('Sign Up')),
+      body: Column(
+            children: [
+              TextField(
               style: const TextStyle(color: Colors.white),
-              controller: _passwordContoller,
-              obscureText: true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: const InputDecoration(
-                hintStyle: TextStyle(color: Colors.deepPurple),
-                hintText: 'password'
-            )
-            ),
-            TextButton(
-                onPressed: () async {
-                  final email = _emailContoller.text;
-                  final password =_passwordContoller.text;
-                  try {
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: email,
-                    password: password);
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'weak-password') {
-                      print('Your password is too weak');
-                    } else if (e.code == 'email-already-in-use'){
-                      print('This email is already in use, try to Sign In');
-                    } else if (e.code == 'invalid-email'){
-                      print('Please type a correct email');
+                controller: _emailContoller,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                    hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                    hintText: 'email'
+              ),
+              ),
+              TextField(
+                style: const TextStyle(color: Colors.white),
+                controller: _passwordContoller,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(
+                  hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                  hintText: 'password'
+              )
+              ),
+              TextButton(
+                  onPressed: () async {
+                    final email = _emailContoller.text;
+                    final password =_passwordContoller.text;
+                    try {
+                      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: email,
+                      password: password);
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        print('Your password is too weak');
+                      } else if (e.code == 'email-already-in-use'){
+                        print('This email is already in use, try to Sign In');
+                      } else if (e.code == 'invalid-email'){
+                        print('Please type a correct email');
+                      }
+                      
                     }
                     
-                  }
-                  
-            },
-            child: const Text('Sign Up'),
-            )
-          ],
-        ); 
+              },
+              child: const Text('Sign Up'),
+              ),
+              const Align(
+              alignment: Alignment.centerLeft,
+                child: Text(
+                  'Already registred?',
+                  style: TextStyle(color: Colors.white),),),
+               Align(
+              alignment: Alignment.centerLeft,
+                child: TextButton(onPressed: (){
+                  Navigator.of(context).pushNamedAndRemoveUntil('/sign-in/',
+                   (route) => false);
+                } ,
+                 child: const Text('Sign In')))
+            ],
+          ),
+    ); 
   }
 }
 
