@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer' as devtools show log; 
 
 // import 'package:flutter/src/widgets/container.dart';
 // import 'package:flutter/src/widgets/framework.dart';
@@ -67,11 +68,11 @@ late final TextEditingController _passwordContoller;
                       password: password);
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
-                        print('Your password is too weak');
+                        devtools.log('Your password is too weak');
                       } else if (e.code == 'email-already-in-use'){
-                        print('This email is already in use, try to Sign In');
+                        devtools.log('This email is already in use, try to Sign In');
                       } else if (e.code == 'invalid-email'){
-                        print('Please type a correct email');
+                        devtools.log('Please type a correct email');
                       }
                       
                     }

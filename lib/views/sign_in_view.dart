@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as devtools show log;
+
+import 'package:lerningdart/main.dart'; 
 
 
 
@@ -64,12 +67,12 @@ late final TextEditingController _passwordContoller;
                       await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: email,
                       password: password);
-                      print('login success');
+                      devtools.log('login success');
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
-                        print('User not found in Firebase');
+                        devtools.log('User not found in Firebase');
                       } else if (e.code == 'wrong-password'){
-                        print('The password is wrong');
+                        devtools.log('The password is wrong');
                       }
                     }
                     // 3 той приклад що зверху

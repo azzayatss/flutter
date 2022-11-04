@@ -2,12 +2,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// ?? для чого матеріал дарт? (це для андро?), чого тоді для іос нічого додаткового не підключаємо?
+// ?? для чого матеріал дарт? (це для андро?),
+// ?? чого тоді для іос нічого додаткового не підключаємо?
 import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
-
 import 'firebase_options.dart';
+import 'dart:developer' as devtools show log; 
+
 //імпортнули сюди інші файлм в яких лежить інші куски коду, це робиться так)
 
 Future<void> main() async {
@@ -40,11 +42,7 @@ class App extends StatelessWidget {
         routes: {
           '/sign-in/':(context) => const SignInView(),
           '/sign-up/':(context) => const SignUpView(),
-        },
-        // home: const HomePage(),
-        // ?? пробував додати якусь наступну сторінку але не зрозумів як, 
-        // ?? де шукати всі варіанти, в кмнд + клік по матіріал апу не найшов))
-        
+        }
       );
   }
 }
@@ -57,8 +55,10 @@ class HomePage extends StatelessWidget {
     return FutureBuilder(
         // todo розібратись з фючер білдером
         future: Firebase.initializeApp(
-          //Firebase.initializeApp() needs to call native code to initialize Firebase, 
-          //тобто ми простка кажемо "ей флаттер ми тут юзаєм firebase, знай про це))"
+          //Firebase.initializeApp() needs to call native code 
+          //to initialize Firebase, 
+          //тобто ми простка кажемо "ей флаттер 
+          //ми тут юзаєм firebase, знай про це))"
           options: DefaultFirebaseOptions.currentPlatform),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -82,6 +82,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
+enum MenuAction { logout }
+
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
 
@@ -94,10 +96,60 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(173, 69, 65, 65),
-      appBar: AppBar(title: const Text('Your Notes')),
-      body: const Text('Hello World!')
+      appBar: 
+        AppBar(title: const Text('Your Notes'),
+        actions: [
+          PopupMenuButton<MenuAction>(
+            onSelected:(value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout){
+                    FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/sign-in/',
+                      (_) => false);
+                  }
+                  break;
+              }
+            }, 
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                value: MenuAction.logout, 
+                child: Text('Log out'))
+              ];
+              
+            }, 
+            )
+        ],),
+      body: const Text('Hello World!'),
       );
   }
+}
+
+Future<bool> showLogOutDialog(BuildContext context) {
+  return showDialog<bool> (
+    context: context,
+    builder: (context) {
+      return  AlertDialog(
+        title: const Text('Sign Out'),
+        content: const Text('Are you sure?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            }, 
+            child: const Text('Cancel')),
+          TextButton(
+            onPressed:(){
+              Navigator.of(context).pop(true);
+            }, 
+            child: const Text('EXIT')),
+        ],
+      );
+    },
+    ).then((value) => value ?? false );
 }
 
 
