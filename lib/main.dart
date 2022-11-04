@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 // ?? для чого матеріал дарт? (це для андро?), чого тоді для іос нічого додаткового не підключаємо?
 import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
+import 'package:lerningdart/views/verify_email_view.dart';
 
 import 'firebase_options.dart';
 //імпортнули сюди інші файлм в яких лежить інші куски коду, це робиться так)
@@ -63,14 +64,17 @@ class HomePage extends StatelessWidget {
           switch (snapshot.connectionState) {
             
           case ConnectionState.done:
-        //   final user = FirebaseAuth.instance.currentUser;
-    
-        //   if (user?.emailVerified ?? false) { 
-        //     return const Text('Done');
-        // } else { 
-        //    return const VerifyEmailView();
-        //   }
-        return const SignInView();
+          final user = FirebaseAuth.instance.currentUser;
+          if (user != null) {
+            if (user.emailVerified){
+              print('email is verified');
+            } else {
+              return const VerifyEmailView();
+            }
+          } else {
+            return const SignInView();
+           }
+          return const Text('Done');
          default: 
          return const CircularProgressIndicator();
           }
