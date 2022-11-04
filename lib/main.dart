@@ -7,9 +7,10 @@ import 'package:lerningdart/views/my_notes_view.dart';
 // ?? чого тоді для іос нічого додаткового не підключаємо?
 import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
+import 'package:lerningdart/views/snack_bar.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
 import 'firebase_options.dart';
-import 'dart:developer' as devtools show log; 
+// import 'dart:developer' as devtools show log; 
 
 //імпортнули сюди інші файлм в яких лежить інші куски коду, це робиться так)
 
@@ -39,7 +40,8 @@ class App extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
-        home: const HomePage (),
+        // home: const HomePage (),
+        home: const SnackBarTest(),
         routes: {
           '/sign-in/':(context) => const SignInView(),
           '/sign-up/':(context) => const SignUpView(),
