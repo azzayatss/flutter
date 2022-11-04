@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
         //   }
         return const SignInView();
          default: 
-         return const Text('Loading...');
+         return const CircularProgressIndicator();
           }
         
         },
@@ -80,29 +80,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class VerifyEmailView extends StatefulWidget {
-  const VerifyEmailView({super.key});
 
-  @override
-  State<VerifyEmailView> createState() => _VerifyEmailViewState();
-}
-
-class _VerifyEmailViewState extends State<VerifyEmailView> {
-  @override
-  Widget build(BuildContext context) {
-    return  Column(children: [
-         const Text('Please Verify your email'),
-         TextButton(
-          onPressed: () async {
-            final user = FirebaseAuth.instance.currentUser;
-            await user?.sendEmailVerification();
-            // ?? треба пояснення по фючербілдер чи фючер + евейт + асинк,
-            // ?? що б було якби я не прописав евейт?
-          }, 
-          child: const Text('Send email verification'))
-      ]);
-  }
-}
 
   
 
