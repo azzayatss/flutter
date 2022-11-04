@@ -68,6 +68,9 @@ late final TextEditingController _passwordContoller;
                       email: email,
                       password: password);
                       devtools.log('login success');
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/notes/',
+                        (_) => false);
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
                         devtools.log('User not found in Firebase');

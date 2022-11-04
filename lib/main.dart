@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lerningdart/views/my_notes_view.dart';
 // ?? для чого матеріал дарт? (це для андро?),
 // ?? чого тоді для іос нічого додаткового не підключаємо?
 import 'package:lerningdart/views/sign_up_view.dart';
@@ -42,6 +43,7 @@ class App extends StatelessWidget {
         routes: {
           '/sign-in/':(context) => const SignInView(),
           '/sign-up/':(context) => const SignUpView(),
+          '/notes/':(context) => const NotesView(),
         }
       );
   }
@@ -84,49 +86,7 @@ class HomePage extends StatelessWidget {
 
 enum MenuAction { logout }
 
-class NotesView extends StatefulWidget {
-  const NotesView({super.key});
 
-  @override
-  State<NotesView> createState() => _NotesViewState();
-}
-
-class _NotesViewState extends State<NotesView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(173, 69, 65, 65),
-      appBar: 
-        AppBar(title: const Text('Your Notes'),
-        actions: [
-          PopupMenuButton<MenuAction>(
-            onSelected:(value) async {
-              switch (value) {
-                case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout){
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/sign-in/',
-                      (_) => false);
-                  }
-                  break;
-              }
-            }, 
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<MenuAction>(
-                value: MenuAction.logout, 
-                child: Text('Log out'))
-              ];
-              
-            }, 
-            )
-        ],),
-      body: const Text('Hello World!'),
-      );
-  }
-}
 
 Future<bool> showLogOutDialog(BuildContext context) {
   return showDialog<bool> (
