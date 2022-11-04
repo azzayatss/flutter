@@ -67,19 +67,35 @@ class HomePage extends StatelessWidget {
           final user = FirebaseAuth.instance.currentUser;
           if (user != null) {
             if (user.emailVerified){
-              print('email is verified');
+              return const NotesView();
             } else {
               return const VerifyEmailView();
             }
           } else {
             return const SignInView();
            }
-          return const Text('Done');
          default: 
          return const CircularProgressIndicator();
           }
-        
         },
+      );
+  }
+}
+
+class NotesView extends StatefulWidget {
+  const NotesView({super.key});
+
+  @override
+  State<NotesView> createState() => _NotesViewState();
+}
+
+class _NotesViewState extends State<NotesView> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(173, 69, 65, 65),
+      appBar: AppBar(title: const Text('Your Notes')),
+      body: const Text('Hello World!')
       );
   }
 }

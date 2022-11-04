@@ -91,7 +91,10 @@ late final TextEditingController _passwordContoller;
                 alignment: Alignment.centerLeft,
                   child: Text(
                     'Not yet registered???\nClick button below to Sign Up',
-                    style: TextStyle(color: Colors.white),),
+                    style: 
+                      TextStyle(
+                        color: Colors.white, 
+                        fontStyle: FontStyle.italic),),
               ),
               Align(
                 alignment: Alignment.centerLeft,
