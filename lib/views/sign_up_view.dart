@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' as devtools show log; 
+import 'dart:developer' as devtools; 
 
 // import 'package:flutter/src/widgets/container.dart';
 // import 'package:flutter/src/widgets/framework.dart';
@@ -65,7 +65,8 @@ late final TextEditingController _passwordContoller;
                     try {
                       await FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: email,
-                      password: password);
+                      password: password,
+                      );
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
                         devtools.log('Your password is too weak');
@@ -74,7 +75,7 @@ late final TextEditingController _passwordContoller;
                       } else if (e.code == 'invalid-email'){
                         devtools.log('Please type a correct email');
                       }
-                      
+                    devtools.log('user successfully registered');
                     }
                     
               },

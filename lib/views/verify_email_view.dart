@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as devtools;
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});
@@ -21,10 +22,16 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             onPressed: () async {
               final user = FirebaseAuth.instance.currentUser;
               await user?.sendEmailVerification();
+              devtools.log('mail was sent');
+              devtools.log(user.toString());
               // ?? треба пояснення по фючербілдер чи фючер + евейт + асинк,
               // ?? що б було якби я не прописав евейт?
             }, 
-            child: const Text('Send email verification'))
+            child: const Text('Send email verification')),
+          TextButton(onPressed: () {
+            final user = FirebaseAuth.instance.currentUser;
+            devtools.log(user.toString());
+          }, child: const Text('check user details'))
         ]),
     );
   }

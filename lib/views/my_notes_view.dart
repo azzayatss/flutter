@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as devtools;
 
 import '../main.dart';
 
@@ -44,7 +45,16 @@ class _NotesViewState extends State<NotesView> {
             }, 
             )
         ],),
-      body: const Text('Hello World!'),
+      body: Column(
+        children: [
+          const Text('Hello world 👋'),
+          TextButton(onPressed: () {
+            final user = FirebaseAuth.instance.currentUser;
+            devtools.log(user.toString());
+          }, child: const Text('data'))
+        ],
+        )
+      
       );
   }
 }
