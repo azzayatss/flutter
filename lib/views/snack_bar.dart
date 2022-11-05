@@ -24,9 +24,9 @@ class SnackBarBody extends StatelessWidget {
         label: 'Sign In',
         onPressed: (){
           devtools.log('redirecting o login page');
-        }
-        ),
-        );
+        }),
+      duration: const Duration(milliseconds: 6000),
+     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
