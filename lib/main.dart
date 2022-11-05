@@ -1,5 +1,6 @@
-// todo 1. add snackbar to signup page "registration is success please log in now"
-//
+// todo 1: add snackbar to signup page "registration is success please log in now"
+// todo 2: add auto formating https://docs.flutter.dev/development/tools/formatting
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

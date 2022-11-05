@@ -73,7 +73,8 @@ late final TextEditingController _passwordContoller;
                         (_) => false);
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
-                        devtools.log('User not found in Firebase');
+                        await showErrorDialog(context, 'User not found');
+                        //!! закічнив тут, якогось х не підтягує текст 
                       } else if (e.code == 'wrong-password'){
                         devtools.log('The password is wrong');
                       }
@@ -118,6 +119,26 @@ late final TextEditingController _passwordContoller;
           ),
     ); 
   }
+}
+
+Future<void> showErrorDialog(
+  BuildContext context, 
+  String text
+  ) {
+    return showDialog(context: context, builder: ((context) {
+      return  AlertDialog(
+        title: const Text('An error occured'),
+        content: const Text('data'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            }, 
+            child: const Text('OK'))
+        ],
+
+      );
+    }));
   }
 
  
