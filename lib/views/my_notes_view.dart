@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools;
 
+import '../constants/routes.dart';
 import '../main.dart';
 
 class NotesView extends StatefulWidget {
@@ -19,7 +20,7 @@ class _NotesViewState extends State<NotesView> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(173, 69, 65, 65),
       appBar: 
-        AppBar(title: const Text('Your Notes'),
+        AppBar(title: const Text('Your Notes 📝'),
         actions: [
           PopupMenuButton<MenuAction>(
             onSelected:(value) async {
@@ -29,7 +30,7 @@ class _NotesViewState extends State<NotesView> {
                   if (shouldLogout){
                     FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/sign-in/',
+                     signInRoute,
                       (_) => false);
                   }
                   break;

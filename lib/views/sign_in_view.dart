@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import '../constants/routes.dart';
+
 
 
 class SignInView extends StatefulWidget {
@@ -67,7 +69,7 @@ late final TextEditingController _passwordContoller;
                       password: password);
                       devtools.log('login success');
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/notes/',
+                        notesRoute,
                         (_) => false);
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
@@ -105,7 +107,7 @@ late final TextEditingController _passwordContoller;
                 child: 
                   TextButton(
                     onPressed: (){
-                      Navigator.of(context).pushNamedAndRemoveUntil('/sign-up/',
+                      Navigator.of(context).pushNamedAndRemoveUntil(signUpRoute,
                        (route) => false);
                     },
                     child: const Text ('Create new account') 

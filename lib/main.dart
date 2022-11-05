@@ -1,7 +1,9 @@
-
+// todo 1. add snackbar to signup page "registration is success please log in now"
+//
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lerningdart/constants/routes.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
 // ?? для чого матеріал дарт? (це для андро?),
 // ?? чого тоді для іос нічого додаткового не підключаємо?
@@ -41,9 +43,9 @@ class App extends StatelessWidget {
         ),
         home: const HomePage (),
         routes: {
-          '/sign-in/':(context) => const SignInView(),
-          '/sign-up/':(context) => const SignUpView(),
-          '/notes/':(context) => const NotesView(),
+          signInRoute:(context) => const SignInView(),
+          signUpRoute:(context) => const SignUpView(),
+          notesRoute:(context) => const NotesView(),
         }
       );
   }
