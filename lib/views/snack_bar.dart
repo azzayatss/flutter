@@ -18,22 +18,31 @@ class SnackBarBody extends StatelessWidget {
   const SnackBarBody({super.key});
 
   void  showSnackBar(BuildContext context) {
-    const snackBar =  SnackBar(content: Text('Snackbar message'));
+    final snackBar =  SnackBar(
+      content: const Text('Registratin Done -> now you need to:'),
+      action: SnackBarAction(
+        label: 'Sign In',
+        onPressed: (){
+          devtools.log('redirecting o login page');
+        }
+        ),
+        );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-          children: [
-            TextButton(
-              onPressed: () {
-                showSnackBar(context);
-              },
-              child: const Text('try it'))
-          ], 
-        );
+    return Center(
+      child: Column(
+            children: [
+              TextButton(
+                onPressed: () {
+                  showSnackBar(context);
+                },
+                child: const Text('Sign up'))
+            ], 
+          ),
+    );
   }
 }
 
