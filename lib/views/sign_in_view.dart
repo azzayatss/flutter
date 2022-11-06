@@ -81,7 +81,10 @@ late final TextEditingController _passwordContoller;
                           context, 
                           'Error: ${e.code}');
                       }
-                    }  
+                    } catch (e) {
+                      await showErrorDialog(context, 
+                      e.toString());
+                    } 
               },
               child: const Text('Sign In'),
               ),
