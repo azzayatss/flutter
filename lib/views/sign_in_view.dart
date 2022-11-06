@@ -73,23 +73,15 @@ late final TextEditingController _passwordContoller;
                         (_) => false);
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
-                        await showErrorDialog(context, 'User not found');
+                        await showErrorDialog(context, 'User not found, check email correctness');
                       } else if (e.code == 'wrong-password'){
-                        devtools.log('The password is wrong');
+                         await showErrorDialog(context, 'Oops - wrong password, try again');
+                      } else {
+                        await showErrorDialog(
+                          context, 
+                          'Error: ${e.code}');
                       }
-                    }
-                    // 3 той приклад що зверху
-                    // 2
-                    //on FirebaseAuthException catch (e) {
-                    //   print(e.code);
-                    // }
-                    //1
-                    //catch (e) {
-                    //   print('Something went wrong');
-                    //   print(e.runtimeType);
-                    //   print(e);
-                    // }
-                    
+                    }  
               },
               child: const Text('Sign In'),
               ),
