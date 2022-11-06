@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lerningdart/constants/routes.dart';
 
-Future<void> showErrorDialog(
+Future<void> showSuccessRegistrationDialog(
   BuildContext context, 
   String text,
   ) {
@@ -8,14 +9,15 @@ Future<void> showErrorDialog(
       context: context, 
       builder: (context) {
       return  AlertDialog(
-        title: const Text('Notification'),
+        title: const Text('Success'),
         content: Text(text),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+              Navigator.of(context).pushNamedAndRemoveUntil(signInRoute, (route) => false);
             }, 
-            child: const Text('OK')
+            child: const Text('Sign In')
             )
          ],
         );

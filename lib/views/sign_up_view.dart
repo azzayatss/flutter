@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lerningdart/utilities/show_error_dialog.dart';
+import 'package:lerningdart/utilities/show_success_dialog.dart';
 import 'dart:developer' as devtools;
-
 import '../constants/routes.dart'; 
 
 // import 'package:flutter/src/widgets/container.dart';
@@ -16,8 +17,8 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
 
-late final TextEditingController _emailContoller;
-late final TextEditingController _passwordContoller;
+  late final TextEditingController _emailContoller;
+  late final TextEditingController _passwordContoller;
 
 @override
   void initState() {
@@ -41,14 +42,14 @@ late final TextEditingController _passwordContoller;
       body: Column(
             children: [
               TextField(
-              style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 controller: _emailContoller,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                     hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
                     hintText: 'email'
-              ),
-              ),
+                    ),
+               ),
               TextField(
                 style: const TextStyle(color: Colors.white),
                 controller: _passwordContoller,
@@ -69,17 +70,38 @@ late final TextEditingController _passwordContoller;
                       email: email,
                       password: password,
                       );
+                      final user = FirebaseAuth.instance.currentUser;
+                      await user?.sendEmailVerification();
+                      Navigator.of(context).pushNamed(verifyEmailRoute);
+                      // showSuccessRegistrationDialog(
+                      //   context, 
+                      //   'user successfully registered, now you can Sign In');
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
-                        devtools.log('Your password is too weak');
+                        showErrorDialog(
+                          context, 
+                          'Your password is too weak: Minimum Password Length should be at least six characters or more'
+                          );
                       } else if (e.code == 'email-already-in-use'){
-                        devtools.log('This email is already in use, try to Sign In');
+                        showErrorDialog(
+                          context, 
+                          'This email is already in use, try to Sign In'
+                          );
                       } else if (e.code == 'invalid-email'){
-                        devtools.log('Please type a correct email');
+                        showErrorDialog(
+                          context, 
+                          'Please type a correct email'
+                          );
+                      } else {
+                        await showErrorDialog(
+                          context, 
+                          'Error: ${e.code}');
                       }
                     devtools.log('user successfully registered');
-                    }
-                    
+                  } catch (e) {
+                      await showErrorDialog(context, 
+                      e.toString());
+                    }   
               },
               child: const Text('Sign Up'),
               ),

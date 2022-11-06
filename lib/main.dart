@@ -1,5 +1,6 @@
 // todo 1: add snackbar to signup page "registration is success please log in now"
 // todo 2: add auto formating https://docs.flutter.dev/development/tools/formatting
+// todo 3 розіратись якого хуя в мене не відпрацьовує вирівнювання в імейл веріф файлі
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,11 +43,13 @@ class App extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
+        // home: const NotesView (),
         home: const HomePage (),
         routes: {
           signInRoute:(context) => const SignInView(),
           signUpRoute:(context) => const SignUpView(),
           notesRoute:(context) => const NotesView(),
+          verifyEmailRoute:(context) => const VerifyEmailView(),
         }
       );
   }
@@ -65,22 +68,21 @@ class HomePage extends StatelessWidget {
           //тобто ми простка кажемо "ей флаттер 
           //ми тут юзаєм firebase, знай про це))"
           options: DefaultFirebaseOptions.currentPlatform),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            
-          case ConnectionState.done:
-          final user = FirebaseAuth.instance.currentUser;
-          if (user != null) {
-            if (user.emailVerified){
-              return const NotesView();
-            } else {
-              return const VerifyEmailView();
-            }
-          } else {
-            return const SignInView();
-           }
-         default: 
-         return const CircularProgressIndicator();
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+            case ConnectionState.done:
+            final user = FirebaseAuth.instance.currentUser;
+            if (user != null) {
+              if (user.emailVerified){
+                return const NotesView();
+                } else {
+                return const VerifyEmailView();
+                }
+              } else {
+                return const SignInView();
+              }
+              default: 
+              return const CircularProgressIndicator();
           }
         },
       );
