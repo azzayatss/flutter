@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
-
 import '../constants/routes.dart';
+import '../utilities/show_error_dialog.dart';
 
 
 
@@ -115,27 +115,6 @@ late final TextEditingController _passwordContoller;
   }
 }
 
-Future<void> showErrorDialog(
-  BuildContext context, 
-  String text,
-  ) {
-    return showDialog(
-      context: context, 
-      builder: (context) {
-      return  AlertDialog(
-        title: const Text('An error occured'),
-        content: Text(text),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            }, 
-            child: const Text('OK')
-            )
-         ],
-        );
-      }
-    );
-  }
+
 
  
