@@ -68,9 +68,17 @@ late final TextEditingController _passwordContoller;
                       email: email,
                       password: password);
                       devtools.log('login success');
-                      Navigator.of(context).pushNamedAndRemoveUntil(
+                      final user = FirebaseAuth.instance.currentUser;
+                      if (user?.emailVerified ?? false){
+                        Navigator.of(context).pushNamedAndRemoveUntil(
                         notesRoute,
                         (_) => false);
+                      } else {
+                         Navigator.of(context).pushNamedAndRemoveUntil(
+                        verifyEmailRoute,
+                        (_) => false);
+                      }
+                      
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
                         await showErrorDialog(context, 'User not found, check email correctness or try to Sign up');

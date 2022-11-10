@@ -37,7 +37,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 TextButton(
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushNamedAndRemoveUntil(signUpRoute, (route) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(signInRoute, (route) => false);
               
                   }, 
                   child: const Text('restart'))
