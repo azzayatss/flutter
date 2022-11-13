@@ -1,14 +1,15 @@
 // todo 1: add snackbar to signup page "registration is success please log in now"
 // todo 2: add auto formating https://docs.flutter.dev/development/tools/formatting
 // todo 3 розіратись якого хуя в мене не відпрацьовує вирівнювання в імейл веріф файлі
+// ?? - nреба пояснення, все шариш до моменту коли не почалась історія з стовренням папки сервісес і всіх наступних файлів. 
+// ?? для чого матеріал дарт? чому його підключення виправляє багато помилок коли ми створюємо нові файли в лібі? 
+// ?? простими словами коли юзати async 
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lerningdart/constants/routes.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
-// ?? для чого матеріал дарт? (це для андро?),
-// ?? чого тоді для іос нічого додаткового не підключаємо?
 import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
@@ -18,7 +19,6 @@ import 'firebase_options.dart';
 //імпортнули сюди інші файлм в яких лежить інші куски коду, це робиться так)
 
 Future<void> main() async {
-  // ?? чому коли юзаємо флаттер байндінг то добавляємо future + async, а якщо ні то не добавляємо?
   WidgetsFlutterBinding.ensureInitialized();
   runApp( const App());
   //the WidgetFlutterBinding is used to interact with the Flutter engine.
@@ -27,8 +27,7 @@ Future<void> main() async {
   //which is done asynchronously therefore you have to call ensureInitialized() 
   //to make sure that you have an instance of the WidgetsBinding.
 }
-// ?? треба пояснення, на хлопський ( void - class - widget), 
-// ?? яка різниця, чому саме така послідовність, що в яких випадках юзати.
+
 
 
 class App extends StatelessWidget {
