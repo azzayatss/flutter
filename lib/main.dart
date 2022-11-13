@@ -5,15 +5,15 @@
 // ?? для чого матеріал дарт? чому його підключення виправляє багато помилок коли ми створюємо нові файли в лібі? 
 // ?? простими словами коли юзати async 
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:lerningdart/constants/routes.dart';
+import 'package:lerningdart/services/auth/auth_service.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
 import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
-import 'firebase_options.dart';
+
 // import 'dart:developer' as devtools show log; 
 
 //імпортнули сюди інші файлм в яких лежить інші куски коду, це робиться так)
@@ -27,8 +27,6 @@ Future<void> main() async {
   //which is done asynchronously therefore you have to call ensureInitialized() 
   //to make sure that you have an instance of the WidgetsBinding.
 }
-
-
 
 class App extends StatelessWidget {
   const App({
@@ -61,18 +59,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
         // todo розібратись з фючер білдером
-        future: Firebase.initializeApp(
-          //Firebase.initializeApp() needs to call native code 
-          //to initialize Firebase, 
-          //тобто ми простка кажемо "ей флаттер 
-          //ми тут юзаєм firebase, знай про це))"
-          options: DefaultFirebaseOptions.currentPlatform),
-          builder: (context, snapshot) {
+        future: AuthService.firebase().initialize(),
+        builder: (context, snapshot) {
             switch (snapshot.connectionState) {
             case ConnectionState.done:
-            final user = FirebaseAuth.instance.currentUser;
+            final user = AuthService.firebase().currentUser;
             if (user != null) {
-              if (user.emailVerified){
+              if (user.isEmailVerified){
                 return const NotesView();
                 } else {
                 return const VerifyEmailView();
@@ -88,33 +81,11 @@ class HomePage extends StatelessWidget {
   }
 }
 
-enum MenuAction { logout }
 
 
 
-Future<bool> showLogOutDialog(BuildContext context) {
-  return showDialog<bool> (
-    context: context,
-    builder: (context) {
-      return  AlertDialog(
-        title: const Text('Sign Out'),
-        content: const Text('Are you sure?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            }, 
-            child: const Text('Cancel')),
-          TextButton(
-            onPressed:(){
-              Navigator.of(context).pop(true);
-            }, 
-            child: const Text('EXIT')),
-        ],
-      );
-    },
-    ).then((value) => value ?? false );
-}
+
+
 
 
 

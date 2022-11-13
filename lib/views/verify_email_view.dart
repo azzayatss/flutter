@@ -1,7 +1,8 @@
 
 
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+import 'package:lerningdart/services/auth/auth_service.dart';
 import 'dart:developer' as devtools;
 
 import '../constants/routes.dart';
@@ -26,17 +27,13 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               const Text('If you havent recieve an email, click button below 👇'),
               TextButton(
                 onPressed: () async {
-                  final user = FirebaseAuth.instance.currentUser;
-                  await user?.sendEmailVerification();
+                  await AuthService.firebase().sendEmailVerification();
                   devtools.log('mail was sent');
-                  devtools.log(user.toString());
-                  // ?? треба пояснення по фючербілдер чи фючер + евейт + асинк,
-                  // ?? що б було якби я не прописав евейт?
                 }, 
                 child: const Text('Send email verification')),
                 TextButton(
                   onPressed: () async {
-                    await FirebaseAuth.instance.signOut();
+                    await AuthService.firebase().logOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(signInRoute, (route) => false);
               
                   }, 

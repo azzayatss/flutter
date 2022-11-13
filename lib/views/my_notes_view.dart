@@ -1,11 +1,12 @@
 
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'dart:developer' as devtools;
 
+import 'package:flutter/material.dart';
+import 'package:lerningdart/services/auth/auth_service.dart';
+import 'dart:developer' as devtools;
 import '../constants/routes.dart';
-import '../main.dart';
+import '../enums/menu_action.dart';
+
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -28,7 +29,7 @@ class _NotesViewState extends State<NotesView> {
                 case MenuAction.logout:
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout){
-                    FirebaseAuth.instance.signOut();
+                   await AuthService.firebase().logOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
                      signInRoute,
                       (_) => false);
@@ -50,12 +51,35 @@ class _NotesViewState extends State<NotesView> {
         children: [
           const Text('Hello world 👋'),
           TextButton(onPressed: () {
-            final user = FirebaseAuth.instance.currentUser;
-            devtools.log(user.toString());
-          }, child: const Text('data'))
+            devtools.log(AuthService.firebase().currentUser.toString());
+          }, child: const Text('Show User\n in console'))
         ],
         )
       
       );
   }
+}
+
+Future<bool> showLogOutDialog(BuildContext context) {
+  return showDialog<bool> (
+    context: context,
+    builder: (context) {
+      return  AlertDialog(
+        title: const Text('Sign Out'),
+        content: const Text('Are you sure?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            }, 
+            child: const Text('Cancel')),
+          TextButton(
+            onPressed:(){
+              Navigator.of(context).pop(true);
+            }, 
+            child: const Text('EXIT')),
+        ],
+      );
+    },
+    ).then((value) => value ?? false );
 }
