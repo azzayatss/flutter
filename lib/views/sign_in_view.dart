@@ -39,14 +39,23 @@ late final TextEditingController _passwordContoller;
     return Scaffold(
       backgroundColor: const Color.fromARGB(173, 69, 65, 65),
       appBar: AppBar(title: const Text('Sign In')),
-      body: Column(
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image:  DecorationImage(
+            image:  AssetImage('/Users/test/azzayatss/Flutter/FlutterProjects/FirstFlutterProject/lerningdart/lib/assets/images/SignInBackGround.png'),
+            fit: BoxFit.cover
+            )
+        ),
+        child: 
+        Column(
             children: [
               TextField(
               style: const TextStyle(color: Colors.white),
                 controller: _emailContoller,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                    hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                    hintStyle: TextStyle(color: Colors.white),
                     hintText: 'Enter you email here'
               ),
               ),
@@ -57,7 +66,7 @@ late final TextEditingController _passwordContoller;
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: const InputDecoration(
-                  hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+                  hintStyle: TextStyle(color: Colors.white),
                   hintText: 'Enter your password here'
               )
               ),
@@ -112,20 +121,112 @@ late final TextEditingController _passwordContoller;
               Align(
                 alignment: Alignment.centerLeft,
                 child: 
-                  TextButton(
+                  ElevatedButton(
                     onPressed: (){
                       Navigator.of(context).pushNamedAndRemoveUntil(signUpRoute,
                        (route) => false);
                     },
-                    child: const Text ('Create new account') 
+                    child: const Text (
+                      'Create new account',
+                      style: TextStyle(
+                        color: Colors.white,
+                      )) 
                   ) ,
               ),
               
             ],
           ),
-    ); 
+      )
+      );
   }
 }
+//       Column(
+//             children: [
+//               TextField(
+//               style: const TextStyle(color: Colors.white),
+//                 controller: _emailContoller,
+//                 keyboardType: TextInputType.emailAddress,
+//                 decoration: const InputDecoration(
+//                     hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+//                     hintText: 'Enter you email here'
+//               ),
+//               ),
+//               TextField(
+//                 style: const TextStyle(color: Colors.white),
+//                 controller: _passwordContoller,
+//                 obscureText: true,
+//                 enableSuggestions: false,
+//                 autocorrect: false,
+//                 decoration: const InputDecoration(
+//                   hintStyle: TextStyle(color: Color.fromARGB(194, 101, 101, 101)),
+//                   hintText: 'Enter your password here'
+//               )
+//               ),
+//               TextButton(
+//                   onPressed: () async {
+//                     final email = _emailContoller.text;
+//                     final password =_passwordContoller.text;
+//                     try {
+//                       await AuthService.firebase().logIn(
+//                         email: email, 
+//                         password: password
+//                         );
+//                       devtools.log('login success');
+//                       final user = AuthService.firebase().currentUser;
+//                       if (user?.isEmailVerified ?? false){
+//                         Navigator.of(context).pushNamedAndRemoveUntil(
+//                         notesRoute,
+//                         (_) => false);
+//                       } else {
+//                          Navigator.of(context).pushNamedAndRemoveUntil(
+//                         verifyEmailRoute,
+//                         (_) => false);
+//                       }
+                      
+//                     } on UserNotFoundAuthException {
+//                       await showErrorDialog(
+//                         context, 
+//                         'User not found, check email correctness or try to Sign up'
+//                         );
+//                     } on WrongPasswordAuthExcetion { 
+//                       await showErrorDialog(
+//                         context, 
+//                         'Oops - wrong password, try again'
+//                         );
+//                     } on GenericAuthException {
+//                        await showErrorDialog(
+//                           context, 
+//                           'Authentication Error');
+//                     }
+//               },
+//               child: const Text('Sign In'),
+//               ),
+//               const Align(
+//                 alignment: Alignment.centerLeft,
+//                   child: Text(
+//                     'Not yet registered???\nClick button below to Sign Up',
+//                     style: 
+//                       TextStyle(
+//                         color: Colors.white, 
+//                         fontStyle: FontStyle.italic),),
+//               ),
+//               Align(
+//                 alignment: Alignment.centerLeft,
+//                 child: 
+//                   TextButton(
+//                     onPressed: (){
+//                       Navigator.of(context).pushNamedAndRemoveUntil(signUpRoute,
+//                        (route) => false);
+//                     },
+//                     child: const Text ('Create new account') 
+//                   ) ,
+//               ),
+              
+//             ],
+//           ),
+//     ); 
+//   }
+// }
 
 
 

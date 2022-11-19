@@ -1,6 +1,7 @@
 // todo 1: add snackbar to signup page "registration is success please log in now"
 // todo 2: add auto formating https://docs.flutter.dev/development/tools/formatting
 // todo 3 розіратись якого хуя в мене не відпрацьовує вирівнювання в імейл веріф файлі
+// todo 4: написати функцію hexColor яка буде автоматично переформатовувати код в такий як треба
 // ?? - nреба пояснення, все шариш до моменту коли не почалась історія з стовренням папки сервісес і всіх наступних файлів. 
 // ?? для чого матеріал дарт? чому його підключення виправляє багато помилок коли ми створюємо нові файли в лібі? 
 // ?? простими словами коли юзати async 
@@ -12,6 +13,8 @@ import 'package:lerningdart/services/auth/auth_service.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
 import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
+import 'package:lerningdart/views/snack_bar.dart';
+import 'package:lerningdart/views/test_view_containers.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
 
 // import 'dart:developer' as devtools show log; 
@@ -38,10 +41,13 @@ class App extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo', 
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary:Colors.grey[700],
+          ),
+          // primarySwatch: Colors.grey[400],
         ),
-        // home: const NotesView (),
-        home: const HomePage (),
+        home: const TestContainersView(),
+        // home: const HomePage (),
         routes: {
           signInRoute:(context) => const SignInView(),
           signUpRoute:(context) => const SignUpView(),
