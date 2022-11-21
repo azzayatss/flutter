@@ -12,11 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:lerningdart/constants/routes.dart';
 import 'package:lerningdart/services/auth/auth_service.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
-import 'package:lerningdart/views/sign_up_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
+import 'package:lerningdart/views/sign_up_view.dart';
 // import 'package:lerningdart/views/snack_bar.dart';
 // import 'package:lerningdart/views/test_view_containers.dart';
-import 'package:lerningdart/views/test_view_stack.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
 
 // import 'dart:developer' as devtools show log;
@@ -48,8 +47,8 @@ class App extends StatelessWidget {
           ),
           // primarySwatch: Colors.grey[400],
         ),
-        home: const TestContainersStackView(),
-        // home: const HomePage (),
+        // home: const SignInView(),
+        home: const HomePage(),
         routes: {
           signInRoute: (context) => const SignInView(),
           signUpRoute: (context) => const SignUpView(),
