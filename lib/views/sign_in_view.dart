@@ -34,8 +34,6 @@ class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color.fromARGB(173, 69, 65, 65),
-      // appBar: AppBar(title: const Text('Sign In')),
       body: Stack(
         children: <Widget>[
           Container(
@@ -200,7 +198,10 @@ class _SignInViewState extends State<SignInView> {
             // right: 125,
             // bottom: 192,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(forgotPasswordRoute, (_) => false);
+              },
               //!добавити раутінг на пустий екран який зроблю згодом
               child: Text('Forgot Password?',
                   style: GoogleFonts.poppins(

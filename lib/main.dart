@@ -11,6 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:lerningdart/constants/routes.dart';
 import 'package:lerningdart/services/auth/auth_service.dart';
+import 'package:lerningdart/views/forgot_password_view.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
 import 'package:lerningdart/views/sign_up_view.dart';
@@ -54,6 +55,7 @@ class App extends StatelessWidget {
           signUpRoute: (context) => const SignUpView(),
           notesRoute: (context) => const NotesView(),
           verifyEmailRoute: (context) => const VerifyEmailView(),
+          forgotPasswordRoute: (context) => const ForgotPassword(),
         });
   }
 }
