@@ -7,6 +7,7 @@
 // ?? простими словами коли юзати async
 // ?? як зробити файл типографіки, туди внести всі шрифти а потім їх реюзати в додатку
 // ?? як зробити таку саму штуку 👆 але з кнопками і т.д. (тобто зі всіма юі елементами)
+// ?? правильна робота з текстами, в мене був трабл з автоматичним перенесенням тексту при заданні ширини батьковсього елементу в чайлді якого я прописував ров (текст + текстбаттон)
 
 import 'package:flutter/material.dart';
 import 'package:lerningdart/constants/routes.dart';
@@ -15,6 +16,7 @@ import 'package:lerningdart/views/forgot_password_view.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
 import 'package:lerningdart/views/sign_up_view.dart';
+import 'package:lerningdart/views/verify_email_ui.dart';
 // import 'package:lerningdart/views/snack_bar.dart';
 // import 'package:lerningdart/views/test_view_containers.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
@@ -48,8 +50,8 @@ class App extends StatelessWidget {
           ),
           // primarySwatch: Colors.grey[400],
         ),
-        // home: const SignInView(),
-        home: const HomePage(),
+        home: const VerifyEmailUi(),
+        // home: const HomePage(),
         routes: {
           signInRoute: (context) => const SignInView(),
           signUpRoute: (context) => const SignUpView(),

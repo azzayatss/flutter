@@ -51,7 +51,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         Positioned(
           top: 238,
-          left: 64,
+          left: 44,
           child: Text(
             'Sorry but this feature does not implemented yet',
             style: GoogleFonts.poppins(
@@ -65,21 +65,43 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           top: 267,
           left: 64,
           child: Row(children: [
-            const Text('you can go back to'),
+            const Text(
+              'you can go back to',
+              style: TextStyle(color: Colors.white),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(signInRoute, (route) => false);
               },
-              child: const Text('Sign In'),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(
+                  color: Color(0xffA1C92E),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            const Text('or'),
+            const Text(
+              'or',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil(signUpRoute, (route) => false);
+                    .pushNamedAndRemoveUntil(signInRoute, (route) => false);
               },
-              child: const Text('Sign Up'),
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(
+                  color: Color(0xffA1C92E),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ]
 
