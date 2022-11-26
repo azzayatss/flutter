@@ -215,9 +215,7 @@ class _SignInViewState extends State<SignInView> {
           ),
           Positioned(
             top: 741,
-            right: 67,
-            left: 67,
-            bottom: 50,
+            left: 98,
             child: Row(
               children: [
                 Text('Dont have an account?',
