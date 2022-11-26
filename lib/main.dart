@@ -2,6 +2,7 @@
 // todo 2: add auto formating https://docs.flutter.dev/development/tools/formatting
 // todo 3 розіратись якого хуя в мене не відпрацьовує вирівнювання в імейл веріф файлі
 // todo 4: написати функцію hexColor яка буде автоматично переформатовувати код в такий як треба
+// todo 5: safearea, column , flexible, expanded, spacer (вивчити то всьо) і переробити стак на всіх скрінах
 // ?? - nреба пояснення, все шариш до моменту коли не почалась історія з стовренням папки сервісес і всіх наступних файлів.
 // ?? для чого матеріал дарт? чому його підключення виправляє багато помилок коли ми створюємо нові файли в лібі?
 // ?? простими словами коли юзати async
@@ -16,7 +17,6 @@ import 'package:lerningdart/views/forgot_password_view.dart';
 import 'package:lerningdart/views/my_notes_view.dart';
 import 'package:lerningdart/views/sign_in_view.dart';
 import 'package:lerningdart/views/sign_up_view.dart';
-import 'package:lerningdart/views/verify_email_ui.dart';
 // import 'package:lerningdart/views/snack_bar.dart';
 // import 'package:lerningdart/views/test_view_containers.dart';
 import 'package:lerningdart/views/verify_email_view.dart';
@@ -50,8 +50,8 @@ class App extends StatelessWidget {
           ),
           // primarySwatch: Colors.grey[400],
         ),
-        home: const VerifyEmailUi(),
-        // home: const HomePage(),
+        // home: const VerifyEmailView(),
+        home: const HomePage(),
         routes: {
           signInRoute: (context) => const SignInView(),
           signUpRoute: (context) => const SignUpView(),
