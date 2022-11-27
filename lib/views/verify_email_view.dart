@@ -34,7 +34,6 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                   color: Colors.white,
                 ),
               ),
-              //! замінити цю кнопку на іконку
             ),
           ),
           Positioned(

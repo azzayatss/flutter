@@ -63,7 +63,6 @@ class _SignUpViewState extends State<SignUpView> {
                   color: Colors.white,
                 ),
               ),
-              //! замінити цю кнопку на іконку
             ),
           ),
           Positioned(
@@ -113,7 +112,6 @@ class _SignUpViewState extends State<SignUpView> {
                     color: Color(0xff97A8D0),
                   ),
                   hintText: 'Email'),
-              //! закінчив тут, спробувати додати іконки до інпутів
             ),
           ),
           Positioned(

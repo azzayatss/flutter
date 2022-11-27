@@ -104,7 +104,6 @@ class _SignInViewState extends State<SignInView> {
                     color: Color(0xff97A8D0),
                   ),
                   hintText: 'Email'),
-              //! закінчив тут, спробувати додати іконки до інпутів
             ),
           ),
           Positioned(
@@ -202,7 +201,6 @@ class _SignInViewState extends State<SignInView> {
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(forgotPasswordRoute, (_) => false);
               },
-              //!добавити раутінг на пустий екран який зроблю згодом
               child: Text('Forgot Password?',
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
