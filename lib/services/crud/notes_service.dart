@@ -1,6 +1,8 @@
-//! chapter 27, 1h37m
-//! updateNote
+//! chapter 28 (почати)
+//! updateNote Yarik
+//! шо означає _ , напркилад _notes / _notesStreamController / _db etc.
 
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -13,13 +15,38 @@ import 'crud_exceptions.dart';
 class NotesSerivce {
   Database? _db;
 
-  Future<DatabaseNote> updateNote(
-      {required DatabaseNote note, required String text}) async {
+  List<DatabaseNote> _notes = [];
+
+  final _notesStreamController =
+      StreamController<List<DatabaseNote>>.broadcast();
+
+  Future<DatabaseUser> getOrCreateUser({required String email}) async {
+    try {
+      final user = await getUser(email: email);
+      return user;
+    } on CouldNotFindUser {
+      final createdUser = await createUser(email: email);
+      return createdUser;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> _cacheNotes() async {
+    final allNotes = await getAllNotes();
+    _notes = allNotes.toList();
+    _notesStreamController.add(_notes);
+  }
+
+  Future<DatabaseNote> updateNote({
+    required DatabaseNote note,
+    required String text,
+  }) async {
     final db = _getDatabaseOrThrow();
-
     //?? нашо я авейт гет ноут? (не поняв)
+    // make sure that note exist
     await getNote(id: note.id);
-
+    //update DB
     final updatesCount = await db.update(noteTable, {
       textColumn: text,
       isSyncedWithCloudColumn: 0,
@@ -30,7 +57,11 @@ class NotesSerivce {
     } else {
       //?? чого я тут повертаю гетноут якщо мені треба повернути статус? тіпа "всьо ок зміни збережено, нотатка апдейтнута"
       //?? покроково, шо відбудеться коли я як юзер апдейтну нотатку в додатку?
-      return await getNote(id: note.id);
+      final updatedNote = await getNote(id: note.id);
+      _notes.removeWhere((note) => note.id == updatedNote.id);
+      _notes.add(updatedNote);
+      _notesStreamController.add(_notes);
+      return updatedNote;
     }
   }
 
@@ -52,14 +83,21 @@ class NotesSerivce {
     if (notes.isEmpty) {
       throw CouldNotFindNote();
     } else {
-      return DatabaseNote.fromRow(notes.first);
+      final note = DatabaseNote.fromRow(notes.first);
+      _notes.removeWhere((note) => note.id == id);
+      _notes.add(note);
+      _notesStreamController.add(_notes);
+      return note;
     }
   }
 
   Future<int> deleteAllNotes() async {
     try {
       final db = _getDatabaseOrThrow();
-      return await db.delete(noteTable);
+      final numberOfDeletions = await db.delete(noteTable);
+      _notes = [];
+      _notesStreamController.add(_notes);
+      return numberOfDeletions;
     } on Exception catch (e) {
       log(e.toString());
       return 0;
@@ -78,6 +116,9 @@ class NotesSerivce {
 
     if (deletedCount == 0) {
       throw CouldNotDeleteNote();
+    } else {
+      _notes.removeWhere((note) => note.id == id);
+      _notesStreamController.add(_notes);
     }
   }
 
@@ -103,6 +144,9 @@ class NotesSerivce {
         text: text,
         isSyncedWithCloud: true,
       );
+
+      _notes.add(note);
+      _notesStreamController.add(_notes);
 
       return note;
     }
@@ -186,6 +230,7 @@ class NotesSerivce {
       await db.execute(createUserTable);
       //create the note table
       await db.execute(createNoteTable);
+      await _cacheNotes();
     } on MissingPlatformDirectoryException {
       throw UnableToGetDocumentsDirectory();
     }

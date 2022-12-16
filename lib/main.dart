@@ -16,7 +16,7 @@
 // ?? hjзібратись зі всіма штуками з @ (override immutable etc.)
 // ?? роізбартись що таке хешкоди ?
 //?? рохжувати покроково нотес_сервіс
-//! 27 chapter 40 m
+//! 28 chapter (почати)
 //! Ярік notes_service
 
 import 'package:flutter/material.dart';
